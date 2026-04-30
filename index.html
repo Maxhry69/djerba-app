@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Djerba — Notre Programme 🌴</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
-<!-- PWA -->
+<title>Djerba 🌴</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1a3a5c">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,673 +12,711 @@
 <meta name="apple-mobile-web-app-title" content="Djerba 🌴">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
-  :root {
-    --sand: #f5e9d0;
-    --terracotta: #c0622a;
-    --ocean: #2a7fa8;
-    --night: #1a1a2e;
-    --mint: #4db6ac;
-    --gold: #d4a547;
-    --white: #fefcf7;
-    --text: #2d2d2d;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(--text); min-height: 100vh; }
+:root {
+  --sand:#f5e9d0; --terracotta:#c0622a; --ocean:#2a7fa8;
+  --night:#1a1a2e; --mint:#4db6ac; --gold:#d4a547;
+  --white:#fefcf7; --text:#2d2d2d;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--text);}
 
-  .hero {
-    background: linear-gradient(160deg, #1a3a5c 0%, #2a7fa8 50%, #c0622a 100%);
-    padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-  .hero-emoji { font-size: 48px; display: block; margin-bottom: 12px; }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 8vw, 3.5rem); color: white; letter-spacing: -0.5px; line-height: 1.1; }
-  .hero-sub { color: rgba(255,255,255,0.8); font-size: 1rem; margin-top: 10px; font-weight: 300; }
-  .hero-dates { display: inline-flex; gap: 8px; margin-top: 20px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border-radius: 50px; padding: 8px 20px; color: white; font-size: 0.9rem; font-weight: 500; }
+.hero{position:relative;height:240px;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,46,.88) 0%,rgba(26,26,46,.15) 60%,transparent 100%);}
+.hero-content{position:relative;z-index:2;padding:18px 18px 22px;width:100%;}
+.hero h1{font-family:'Playfair Display',serif;font-size:1.9rem;color:white;line-height:1.1;font-weight:700;}
+.hero-sub{color:rgba(255,255,255,.7);font-size:.8rem;margin-top:3px;}
+.hero-dates{display:inline-flex;align-items:center;gap:5px;margin-top:9px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:50px;padding:4px 13px;color:white;font-size:.75rem;font-weight:500;}
 
-  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-  .infos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 32px auto; max-width: 800px; padding: 0 20px; }
-  .info-card { background: var(--white); border-radius: 16px; padding: 18px; border-left: 4px solid var(--terracotta); }
-  .info-card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--terracotta); margin-bottom: 8px; }
-  .info-card p { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+.meteo-band{background:var(--night);padding:9px 14px;overflow-x:auto;white-space:nowrap;display:flex;gap:7px;align-items:center;scrollbar-width:none;}
+.meteo-band::-webkit-scrollbar{display:none;}
+.meteo-day{display:inline-flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.08);border-radius:9px;padding:6px 9px;min-width:54px;flex-shrink:0;}
+.meteo-label{font-size:.62rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.4px;}
+.meteo-icon{font-size:1.2rem;margin:2px 0;}
+.meteo-temp{font-size:.68rem;color:white;font-weight:600;}
+.meteo-rain{font-size:.58rem;color:#90caf9;}
+.meteo-loading{color:rgba(255,255,255,.4);font-size:.73rem;padding:6px;}
 
-  .budget-banner { background: var(--night); color: white; padding: 20px 24px; text-align: center; border-radius: 16px; max-width: 800px; margin: 0 auto 32px; }
-  .budget-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 8px; }
-  .budget-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 12px; }
-  .budget-item { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; }
-  .budget-item span { color: var(--gold); font-weight: 600; }
+.tabs{display:flex;background:var(--white);border-bottom:2px solid var(--sand);position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.tab{flex:1;padding:9px 4px;text-align:center;font-size:.7rem;font-weight:600;color:#999;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.3px;}
+.tab.active{color:var(--terracotta);border-bottom-color:var(--terracotta);}
 
-  .days-wrapper { padding: 0 20px; max-width: 800px; margin: 0 auto; }
-  .day-block { background: var(--white); border-radius: 20px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
-  .day-header { padding: 20px 24px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: background 0.2s; }
-  .day-header:hover { background: rgba(192,98,42,0.04); }
-  .day-number { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; flex-shrink: 0; }
-  .day-info { flex: 1; }
-  .day-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; }
-  .day-tagline { font-size: 0.82rem; color: #777; margin-top: 2px; }
-  .day-toggle { color: #aaa; font-size: 1.2rem; transition: transform 0.3s; }
-  .day-toggle.open { transform: rotate(180deg); }
-  .day-content { display: none; padding: 0 24px 24px; }
-  .day-content.open { display: block; }
+.panel{display:none;}
+.panel.active{display:block;}
 
-  .slot { display: flex; gap: 14px; margin-bottom: 18px; padding: 14px; border-radius: 12px; background: rgba(245,233,208,0.4); }
-  .slot-time { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px; color: var(--terracotta); width: 60px; flex-shrink: 0; padding-top: 2px; text-transform: uppercase; }
-  .slot-icon { font-size: 1.3rem; flex-shrink: 0; width: 28px; text-align: center; }
-  .slot-body { flex: 1; }
-  .slot-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
-  .slot-desc { font-size: 0.83rem; color: #555; line-height: 1.5; }
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px 10px 4px;}
+.info-card{background:var(--white);border-radius:11px;padding:11px;border-left:3px solid var(--terracotta);}
+.info-card h3{font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:var(--terracotta);margin-bottom:4px;}
+.info-card p{font-size:.76rem;line-height:1.5;}
 
-  .tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-top: 6px; margin-right: 4px; }
-  .tag-price { background: #e8f5e9; color: #2e7d32; }
-  .tag-taxi { background: #fff3e0; color: #e65100; }
-  .tag-kit { background: #e3f2fd; color: #1565c0; }
-  .tag-tip { background: #fce4ec; color: #880e4f; }
-  .tag-resto { background: #f3e5f5; color: #6a1b9a; }
+.budget-banner{background:var(--night);color:white;margin:7px 10px;border-radius:11px;padding:13px 14px;}
+.budget-banner h3{font-size:.75rem;font-weight:600;margin-bottom:7px;opacity:.65;text-transform:uppercase;letter-spacing:.5px;}
+.budget-items{display:flex;flex-wrap:wrap;gap:5px;}
+.budget-item{background:rgba(255,255,255,.1);border-radius:7px;padding:4px 9px;font-size:.7rem;}
+.budget-item span{color:var(--gold);font-weight:600;}
 
-  .map-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--ocean); text-decoration: none; margin-top: 5px; font-weight: 500; }
-  .map-link:hover { text-decoration: underline; }
+.trajet-card{background:var(--white);margin:7px 10px;border-radius:11px;padding:13px;border-top:3px solid var(--ocean);}
+.trajet-card h3{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--ocean);margin-bottom:9px;}
+.trajet-step{display:flex;gap:9px;align-items:flex-start;margin-bottom:7px;font-size:.78rem;}
+.trajet-icon{font-size:.95rem;flex-shrink:0;width:20px;text-align:center;}
+.trajet-body strong{display:block;font-weight:600;font-size:.8rem;}
+.trajet-body span{color:#777;font-size:.72rem;}
 
-  .d1 .day-number { background: #1a3a5c; color: white; }
-  .d2 .day-number { background: #c0622a; color: white; }
-  .d3 .day-number { background: #2a7fa8; color: white; }
-  .d4 .day-number { background: #4db6ac; color: white; }
-  .d5 .day-number { background: #6d4c41; color: white; }
-  .d6 .day-number { background: #5c6bc0; color: white; }
-  .d7 .day-number { background: #388e3c; color: white; }
-  .d8 .day-number { background: #1a3a5c; color: white; }
+.days-wrapper{padding:7px 10px 10px;}
 
-  .restos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px; }
-  .resto-card { background: var(--white); border-radius: 14px; padding: 16px; border-top: 3px solid var(--terracotta); box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-  .resto-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
-  .resto-stars { color: var(--gold); font-size: 0.8rem; }
-  .resto-desc { font-size: 0.8rem; color: #555; margin-top: 6px; line-height: 1.4; }
-  .resto-price { font-size: 0.78rem; color: #2e7d32; font-weight: 600; margin-top: 6px; }
+.day-block{background:var(--white);border-radius:13px;margin-bottom:7px;overflow:hidden;box-shadow:0 1px 7px rgba(0,0,0,.06);}
+.day-header{padding:11px 13px;display:flex;align-items:center;gap:9px;cursor:pointer;transition:background .2s;}
+.day-header:hover{background:rgba(192,98,42,.04);}
+.day-number{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;flex-shrink:0;color:white;}
+.day-info{flex:1;min-width:0;}
+.day-name{font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.day-tagline{font-size:.68rem;color:#888;margin-top:1px;}
+.day-meta{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.day-weather{font-size:.67rem;color:white;background:rgba(0,0,0,.18);border-radius:20px;padding:2px 6px;white-space:nowrap;}
+.day-toggle{color:#bbb;font-size:.85rem;transition:transform .3s;}
+.day-toggle.open{transform:rotate(180deg);}
 
-  /* CARTE */
-  .map-section { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.09); margin-top: 12px; }
-  .map-iframe { width: 100%; height: 440px; border: none; display: block; }
-  .map-links-bar { padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 8px; background: var(--white); border-radius: 0 0 20px 20px; }
-  .map-btn { font-size: 0.75rem; padding: 5px 12px; border-radius: 20px; text-decoration: none; white-space: nowrap; }
-  .map-btn-hotel { background: #e3f2fd; color: #1565c0; }
-  .map-btn-resto { background: #f3e5f5; color: #6a1b9a; }
-  .map-btn-culture { background: #e8f5e9; color: #2e7d32; }
+.day-content{display:none;padding:0 11px 11px;}
+.day-content.open{display:block;}
 
-  /* CHECKLIST */
-  .checklist-progress { margin-top: 12px; background: var(--white); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
-  .progress-bar-wrap { flex: 1; height: 8px; background: #e0e0e0; border-radius: 99px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--mint), #2e7d32); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
-  .progress-label { font-size: 0.8rem; font-weight: 600; color: var(--mint); white-space: nowrap; }
+.slot{display:flex;gap:9px;margin-bottom:7px;padding:9px;border-radius:9px;background:rgba(245,233,208,.35);}
+.slot-time{font-size:.62rem;font-weight:700;color:var(--terracotta);width:44px;flex-shrink:0;padding-top:2px;text-transform:uppercase;}
+.slot-icon{font-size:1rem;flex-shrink:0;width:20px;text-align:center;}
+.slot-body{flex:1;min-width:0;}
+.slot-title{font-weight:600;font-size:.82rem;margin-bottom:2px;}
+.slot-desc{font-size:.72rem;color:#555;line-height:1.4;}
 
-  .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-  .check-item {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 0.85rem; background: var(--white); padding: 10px 14px;
-    border-radius: 10px; cursor: pointer; user-select: none;
-    transition: background 0.2s, opacity 0.2s, border-color 0.2s;
-    border: 2px solid transparent;
-  }
-  .check-item:hover { background: #f0faf0; border-color: #c8e6c9; }
-  .check-item.checked { background: #f0fdf0; border-color: var(--mint); opacity: 0.7; }
-  .check-item.checked span.label { text-decoration: line-through; color: #999; }
-  .check-box {
-    width: 22px; height: 22px; border-radius: 6px; border: 2px solid #ccc;
-    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; color: white; background: white; transition: all 0.2s;
-  }
-  .check-item.checked .check-box { background: var(--mint); border-color: var(--mint); }
-  .check-item.checked .check-box::after { content: '✓'; font-weight: 700; }
+.tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;}
+.tag{display:inline-block;padding:2px 6px;border-radius:20px;font-size:.62rem;font-weight:600;}
+.tag-price{background:#e8f5e9;color:#2e7d32;}
+.tag-taxi{background:#fff3e0;color:#e65100;}
+.tag-kit{background:#e3f2fd;color:#1565c0;}
+.tag-tip{background:#fce4ec;color:#880e4f;}
+.tag-resto{background:#f3e5f5;color:#6a1b9a;}
 
-  .section-heading { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--terracotta); color: var(--night); }
+.links-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.ext-link{display:inline-flex;align-items:center;gap:2px;font-size:.65rem;color:var(--ocean);text-decoration:none;background:rgba(42,127,168,.09);border-radius:20px;padding:2px 7px;font-weight:500;}
+.ext-link:hover{background:rgba(42,127,168,.18);}
 
-  footer { text-align: center; padding: 32px 20px; color: #888; font-size: 0.8rem; margin-top: 32px; }
+.d0 .day-number{background:#888;}
+.d1 .day-number{background:#c0622a;}
+.d2 .day-number{background:#2a7fa8;}
+.d3 .day-number{background:#4db6ac;}
+.d4 .day-number{background:#6d4c41;}
+.d5 .day-number{background:#5c6bc0;}
+.d6 .day-number{background:#388e3c;}
+.d7 .day-number{background:#1a3a5c;}
+.d8 .day-number{background:#444;}
 
-  @media (max-width: 480px) {
-    .checklist { grid-template-columns: 1fr; }
-    .slot { flex-wrap: wrap; }
-    .slot-time { width: auto; }
-    .map-iframe { height: 300px; }
-  }
+.restos-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:8px 10px 10px;}
+.resto-card{background:var(--white);border-radius:11px;padding:11px;border-top:3px solid var(--terracotta);}
+.resto-name{font-weight:700;font-size:.8rem;margin-bottom:2px;}
+.resto-stars{color:var(--gold);font-size:.68rem;}
+.resto-desc{font-size:.7rem;color:#555;margin-top:3px;line-height:1.4;}
+.resto-price{font-size:.68rem;color:#2e7d32;font-weight:600;margin-top:3px;}
+
+.map-section{margin:7px 10px;background:var(--white);border-radius:13px;overflow:hidden;}
+.map-iframe{width:100%;height:320px;border:none;display:block;}
+.map-links-bar{padding:9px 10px;display:flex;flex-wrap:wrap;gap:5px;}
+.map-btn{font-size:.66rem;padding:3px 9px;border-radius:20px;text-decoration:none;white-space:nowrap;}
+.map-btn-hotel{background:#e3f2fd;color:#1565c0;}
+.map-btn-resto{background:#f3e5f5;color:#6a1b9a;}
+.map-btn-culture{background:#e8f5e9;color:#2e7d32;}
+
+.checklist-wrap{padding:4px 10px 10px;}
+.checklist-progress{background:var(--white);border-radius:9px;padding:9px 12px;display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.progress-bar-wrap{flex:1;height:5px;background:#e0e0e0;border-radius:99px;overflow:hidden;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--mint),#2e7d32);border-radius:99px;transition:width .4s;width:0%;}
+.progress-label{font-size:.7rem;font-weight:600;color:var(--mint);white-space:nowrap;}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.check-item{display:flex;align-items:center;gap:7px;font-size:.76rem;background:var(--white);padding:8px 10px;border-radius:8px;cursor:pointer;user-select:none;border:1.5px solid transparent;transition:all .2s;}
+.check-item:hover{border-color:#c8e6c9;}
+.check-item.checked{background:#f0fdf0;border-color:var(--mint);opacity:.7;}
+.check-item.checked .label{text-decoration:line-through;color:#999;}
+.check-box{width:17px;height:17px;border-radius:4px;border:2px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:white;background:white;transition:all .2s;}
+.check-item.checked .check-box{background:var(--mint);border-color:var(--mint);}
+.check-item.checked .check-box::after{content:'✓';font-weight:700;}
+
+.tips-wrap{padding:2px 10px 14px;}
+.tip-item{background:var(--white);border-radius:9px;padding:9px 11px;margin-bottom:5px;font-size:.76rem;line-height:1.5;}
+.tip-item strong{color:var(--terracotta);}
+
+.section-mini{font-family:'Playfair Display',serif;font-size:.95rem;margin:10px 0 6px;color:var(--night);}
+
+footer{text-align:center;padding:18px;color:#aaa;font-size:.7rem;}
+
+@media(max-width:360px){
+  .checklist,.restos-grid,.infos-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <span class="hero-emoji">🌴</span>
-  <h1>Djerba en famille</h1>
-  <p class="hero-sub">Le programme aux petits oignons — avec bébé !</p>
-  <div class="hero-dates">✈️ 6 mai → 14 mai 2025</div>
-</div>
-
-<div style="height:32px"></div>
-
-<div class="infos-grid">
-  <div class="info-card"><h3>🏨 Hôtel</h3><p>Djerba Castille Couples & Families — Zone d'Aghir<br>All inclusive ✅</p></div>
-  <div class="info-card"><h3>💱 Monnaie</h3><p>Dinar tunisien (TND)<br><strong>1 € ≈ 3,3 TND</strong><br>Retrait DAB sur place conseillé</p></div>
-  <div class="info-card"><h3>🚕 Taxis</h3><p>Hôtel ↔ Midoun : ~10 TND <em>(~3€)</em><br>Hôtel ↔ Houmt Souk : ~20 TND <em>(~6€)</em><br>Négociez toujours avant</p></div>
-  <div class="info-card"><h3>👶 Bébé 11 mois</h3><p>Porte-bébé pour médina & Djerbahood. Poussette pour musées & parc. Siestes intégrées dans le programme.</p></div>
-</div>
-
-<div class="container">
-<div class="budget-banner">
-  <h3>💰 Budget estimatif hors hôtel (2 adultes)</h3>
-  <div class="budget-items">
-    <div class="budget-item">Restos (5 sorties) <span>~120–160 TND (~36–48€)</span></div>
-    <div class="budget-item">Activités <span>~150–200 TND (~45–60€)</span></div>
-    <div class="budget-item">Taxis <span>~120–150 TND (~36–45€)</span></div>
-    <div class="budget-item">Shopping / extras <span>~50–100 TND (~15–30€)</span></div>
-    <div class="budget-item">Total ≈ <span>440–610 TND (~135–185€)</span></div>
+  <img class="hero-img" src="https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=900&q=80&fit=crop&crop=center" alt="Djerba"
+    onerror="this.src='https://images.unsplash.com/photo-1539768942893-daf53e448371?w=900&q=80&fit=crop'">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Djerba 🌴</h1>
+    <p class="hero-sub">Programme vacances en famille</p>
+    <div class="hero-dates">✈️ 6 → 14 mai 2025 &nbsp;•&nbsp; 👶 bébé 11 mois</div>
   </div>
 </div>
+
+<div class="meteo-band" id="meteoBand">
+  <span class="meteo-loading">⏳ Chargement météo...</span>
 </div>
 
-<!-- ===== JOURS ===== -->
-<div class="days-wrapper">
-<h2 class="section-heading">📅 Programme jour par jour</h2>
+<div class="tabs">
+  <div class="tab active" onclick="showTab('programme',this)">📅 Programme</div>
+  <div class="tab" onclick="showTab('restos',this)">🍽️ Restos</div>
+  <div class="tab" onclick="showTab('carte',this)">🗺️ Carte</div>
+  <div class="tab" onclick="showTab('infos',this)">ℹ️ Infos</div>
+</div>
 
-<!-- J1 -->
-<div class="day-block d1">
+<!-- ===== PROGRAMME ===== -->
+<div class="panel active" id="panel-programme">
+<div class="days-wrapper">
+
+<div class="day-block d0">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J1</div>
-    <div class="day-info"><div class="day-name">Lundi 6 mai — Arrivée nocturne 🌙</div><div class="day-tagline">On pose les valises et on récupère</div></div>
+    <div class="day-number" style="font-size:1.1rem;">🏠</div>
+    <div class="day-info">
+      <div class="day-name">Mardi 6 mai — Départ de Levallois 🚇</div>
+      <div class="day-tagline">Pont de Levallois-Bécon → CDG → Djerba</div>
+    </div>
     <div class="day-toggle">▼</div>
   </div>
   <div class="day-content">
     <div class="slot">
-      <div class="slot-time">22h35</div><div class="slot-icon">✈️</div>
+      <div class="slot-time">~15h</div><div class="slot-icon">🚇</div>
       <div class="slot-body">
-        <div class="slot-title">Atterrissage à l'aéroport de Djerba-Zarzis</div>
-        <div class="slot-desc">Formalités rapides, récupération bagages, taxi jusqu'à l'hôtel. ~25 min de route.</div>
-        <span class="tag tag-taxi">🚕 Aéroport → hôtel : ~25–30 TND (~8–9€)</span>
-        <span class="tag tag-kit">🎒 Porte-bébé pour le trajet si bébé dort</span>
+        <div class="slot-title">Métro L3 — Pont de Levallois-Bécon</div>
+        <div class="slot-desc">Direction Gallieni → changement pour RER B → CDG. ~1h de porte à porte.</div>
+        <div class="tags"><span class="tag tag-tip">💡 Poussette pliée dans le métro</span></div>
+        <div class="links-row">
+          <a class="ext-link" href="https://maps.google.com/?q=Pont+de+Levallois+Becon+metro" target="_blank">📍 Station</a>
+          <a class="ext-link" href="https://www.ratp.fr/itineraires" target="_blank">🗺️ RATP</a>
+        </div>
       </div>
     </div>
     <div class="slot">
-      <div class="slot-time">00h00</div><div class="slot-icon">🛏️</div>
-      <div class="slot-body"><div class="slot-title">Installation & dodo</div><div class="slot-desc">C'est tout. Bébé est fatigué, vous aussi. On garde les explorations pour demain !</div></div>
+      <div class="slot-time">RER B</div><div class="slot-icon">🚆</div>
+      <div class="slot-body">
+        <div class="slot-title">RER B → CDG Terminal 2 ou 3</div>
+        <div class="slot-desc">~35 min depuis Châtelet. Vérifiez votre terminal sur le billet.</div>
+        <div class="tags"><span class="tag tag-price">~12€/pers</span></div>
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-time">~18h</div><div class="slot-icon">✈️</div>
+      <div class="slot-body">
+        <div class="slot-title">Enregistrement + sécurité CDG</div>
+        <div class="slot-desc">Arrivez 2h avant. File famille avec bébé souvent plus rapide.</div>
+        <div class="tags"><span class="tag tag-tip">💡 File prioritaire famille disponible</span></div>
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-time">22h35</div><div class="slot-icon">🛬</div>
+      <div class="slot-body">
+        <div class="slot-title">Atterrissage Djerba + taxi hôtel</div>
+        <div class="tags"><span class="tag tag-taxi">~25–30 TND (~8–9€)</span><span class="tag tag-kit">🎒 Porte-bébé pour le trajet</span></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- J2 -->
-<div class="day-block d2">
+<div class="day-block d1">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J2</div>
-    <div class="day-info"><div class="day-name">Mardi 7 mai — Premier soleil 🌅</div><div class="day-tagline">Prise de marques, plage et voisinage</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J1</div>
+    <div class="day-info">
+      <div class="day-name">Mercredi 7 mai — Premier soleil 🌅</div>
+      <div class="day-tagline">Prise de marques, plage & voisinage</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-7mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
     <div class="slot">
-      <div class="slot-time">Matin</div><div class="slot-icon">🌞</div>
-      <div class="slot-body"><div class="slot-title">Petit déj à l'hôtel + découverte des lieux</div><div class="slot-desc">Profitez du buffet all inclusive, repérez la piscine et la plage.</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-time">Matin</div><div class="slot-icon">☕</div>
+      <div class="slot-body"><div class="slot-title">Buffet hôtel + découverte des lieux</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span></div></div>
     </div>
     <div class="slot">
       <div class="slot-time">11h–13h</div><div class="slot-icon">🏖️</div>
       <div class="slot-body">
         <div class="slot-title">Plage d'Aghir — à deux pas de l'hôtel</div>
         <div class="slot-desc">Sable fin, eaux peu profondes idéales pour bébé.</div>
-        <span class="tag tag-price">Gratuit</span>
-        <span class="tag tag-kit">☀️ Chapeau + SPF50 bébé + tente de plage</span>
+        <div class="tags"><span class="tag tag-price">Gratuit</span><span class="tag tag-kit">☀️ SPF50 + chapeau + tente plage</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Plage+Aghir+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">Après-midi</div><div class="slot-icon">😴</div>
-      <div class="slot-body"><div class="slot-title">Sieste de bébé + repos à la piscine</div><div class="slot-desc">À tour de rôle — l'un reste avec bébé, l'autre profite.</div></div>
+      <div class="slot-body"><div class="slot-title">Sieste bébé + piscine hôtel</div><div class="slot-desc">À tour de rôle.</div></div>
     </div>
     <div class="slot">
-      <div class="slot-time">Soir</div><div class="slot-icon">🌙</div>
-      <div class="slot-body"><div class="slot-title">Dîner à l'hôtel + coucher bébé</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-time">Soir</div><div class="slot-icon">🍽️</div>
+      <div class="slot-body"><div class="slot-title">Dîner hôtel + coucher bébé</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span></div></div>
     </div>
   </div>
 </div>
 
-<!-- J3 -->
-<div class="day-block d3">
+<div class="day-block d2">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J3</div>
-    <div class="day-info"><div class="day-name">Mercredi 8 mai — Aventure culturelle 🏛️</div><div class="day-tagline">Houmt Souk, médina & déjeuner typique</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J2</div>
+    <div class="day-info">
+      <div class="day-name">Jeudi 8 mai — Houmt Souk 🏛️</div>
+      <div class="day-tagline">Fort, médina & déjeuner typique</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-8mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
     <div class="slot">
       <div class="slot-time">9h30</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Taxi vers Houmt Souk</div><span class="tag tag-taxi">🚕 ~20 TND (~6€) aller</span><span class="tag tag-kit">🎒 Porte-bébé (rues étroites)</span></div>
+      <div class="slot-body"><div class="slot-title">Taxi → Houmt Souk</div><div class="tags"><span class="tag tag-taxi">~20 TND (~6€)</span><span class="tag tag-kit">🎒 Porte-bébé</span></div></div>
     </div>
     <div class="slot">
       <div class="slot-time">10h–12h</div><div class="slot-icon">🏰</div>
       <div class="slot-body">
         <div class="slot-title">Fort Borj Ghazi Mustapha</div>
-        <div class="slot-desc">Forteresse du XVe siècle, vue imprenable depuis les remparts.</div>
-        <span class="tag tag-price">~8 TND/adulte (~2,5€)</span>
-        <span class="tag tag-kit">🎒 Porte-bébé (escaliers)</span>
-        <a class="map-link" href="https://maps.google.com/?q=Ghazi+Mustapha+Fortress+Houmt+Souk+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-desc">Forteresse XVe siècle, vue mer depuis les remparts.</div>
+        <div class="tags"><span class="tag tag-price">~8 TND (~2,5€)/adulte</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Borj+Ghazi+Mustapha+Houmt+Souk+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
-      <div class="slot-time">12h–13h</div><div class="slot-icon">🛍️</div>
+      <div class="slot-time">12h</div><div class="slot-icon">🛍️</div>
       <div class="slot-body">
-        <div class="slot-title">Balade dans la médina de Houmt Souk</div>
-        <div class="slot-desc">Ruelles blanches et bleues, céramiques, épices, tissus.</div>
-        <span class="tag tag-price">Gratuit (hors achats)</span>
-        <a class="map-link" href="https://maps.google.com/?q=Medina+Houmt+Souk+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">Médina de Houmt Souk</div>
+        <div class="slot-desc">Ruelles blanches et bleues, céramiques, épices.</div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Medina+Houmt+Souk+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">13h</div><div class="slot-icon">🍤</div>
       <div class="slot-body">
-        <div class="slot-title">🍽️ Déjeuner — Restaurant Malouf ⭐ 4.9/5</div>
-        <div class="slot-desc">Couscous au poisson exceptionnel, crevettes grillées, harissa maison. Portions généreuses.</div>
-        <span class="tag tag-resto">🥘 Cuisine tunisienne</span>
-        <span class="tag tag-price">~25–35 TND/pers (~8–11€)</span>
-        <a class="map-link" href="https://maps.google.com/?q=Restaurant+Malouf+Houmt+Souk+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">🍽️ Déjeuner — Restaurant Malouf ⭐4.9</div>
+        <div class="slot-desc">Couscous poisson, crevettes grillées, harissa maison.</div>
+        <div class="tags"><span class="tag tag-price">~25–35 TND (~8–11€)/pers</span><span class="tag tag-resto">Tunisien</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Restaurant+Malouf+Houmt+Souk+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">14h30</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Retour hôtel + sieste bébé</div><span class="tag tag-taxi">🚕 ~20 TND (~6€) retour</span></div>
+      <div class="slot-body"><div class="slot-title">Retour hôtel + sieste bébé</div><div class="tags"><span class="tag tag-taxi">~20 TND (~6€) retour</span></div></div>
     </div>
     <div class="slot">
-      <div class="slot-time">Soir</div><div class="slot-icon">🏨</div>
-      <div class="slot-body"><div class="slot-title">Dîner all inclusive + coucher bébé</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-time">Soir</div><div class="slot-icon">🍽️</div>
+      <div class="slot-body"><div class="slot-title">Dîner all inclusive</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span></div></div>
     </div>
   </div>
 </div>
 
-<!-- J4 -->
-<div class="day-block d4">
+<div class="day-block d3">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J4</div>
-    <div class="day-info"><div class="day-name">Jeudi 9 mai — Street art & synagogue 🎨</div><div class="day-tagline">Djerbahood + El Ghriba + dîner sortie #1</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J3</div>
+    <div class="day-info">
+      <div class="day-name">Vendredi 9 mai — Street art & synagogue 🎨</div>
+      <div class="day-tagline">Djerbahood + El Ghriba + dîner sortie #1</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-9mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
     <div class="slot">
-      <div class="slot-time">9h</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Taxi vers Erriadh (Djerbahood)</div><span class="tag tag-taxi">🚕 ~15 TND (~4,5€)</span></div>
-    </div>
-    <div class="slot">
-      <div class="slot-time">9h30–11h</div><div class="slot-icon">🎨</div>
+      <div class="slot-time">9h30</div><div class="slot-icon">🎨</div>
       <div class="slot-body">
-        <div class="slot-title">Djerbahood — Village de street art</div>
-        <div class="slot-desc">150 artistes de 30 pays ont transformé ce village en musée à ciel ouvert. Bougainvilliers, portes bleues, fresques géantes. Magique le matin.</div>
-        <span class="tag tag-price">Gratuit</span>
-        <span class="tag tag-kit">🎒 Porte-bébé — rues pavées irrégulières</span>
-        <a class="map-link" href="https://maps.google.com/?q=Djerbahood+Erriadh+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">Djerbahood — Village street art</div>
+        <div class="slot-desc">150 artistes de 30 pays. Fresques géantes, ruelles blanches. Magique le matin.</div>
+        <div class="tags"><span class="tag tag-price">Gratuit</span><span class="tag tag-taxi">~15 TND (~4,5€)</span><span class="tag tag-kit">🎒 Porte-bébé</span></div>
+        <div class="links-row">
+          <a class="ext-link" href="https://maps.google.com/?q=Djerbahood+Erriadh+Djerba" target="_blank">📍 Maps</a>
+          <a class="ext-link" href="https://www.djerbahood.com" target="_blank">🌐 Site</a>
+        </div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">11h</div><div class="slot-icon">✡️</div>
       <div class="slot-body">
         <div class="slot-title">Synagogue El Ghriba</div>
-        <div class="slot-desc">Une des plus anciennes synagogues du monde. Architecture somptueuse, azulejos bleus. Couvre-chef fourni sur place.</div>
-        <span class="tag tag-price">Entrée libre (donation appréciée)</span>
-        <span class="tag tag-tip">💡 Fermée le samedi — jeudi = idéal ✅</span>
-        <a class="map-link" href="https://maps.google.com/?q=El+Ghriba+synagogue+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-desc">Une des plus anciennes synagogues du monde. Azulejos bleus, architecture somptueuse.</div>
+        <div class="tags"><span class="tag tag-price">Entrée libre</span><span class="tag tag-tip">💡 Fermée le samedi</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=El+Ghriba+synagogue+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">12h30</div><div class="slot-icon">🍽️</div>
       <div class="slot-body">
-        <div class="slot-title">🍽️ Déjeuner — Chez Moktar à Midoun ⭐ 4.7/5</div>
-        <div class="slot-desc">Légende de Djerba. Couscous au "mlhoukhia" (sauce mijotée des heures), décor plein de vie. Portions XXL.</div>
-        <span class="tag tag-resto">🥘 Cuisine tunisienne authentique</span>
-        <span class="tag tag-price">~25–35 TND/pers (~8–11€)</span>
-        <span class="tag tag-tip">💡 Taxi Erriadh→Midoun : ~8 TND (~2,5€)</span>
-        <a class="map-link" href="https://maps.google.com/?q=Restaurant+chez+Moktar+Midoun+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">🍽️ Déjeuner — Chez Moktar ⭐4.7</div>
+        <div class="slot-desc">Légende locale. Couscous mlhoukhia, portions XXL.</div>
+        <div class="tags"><span class="tag tag-price">~25–35 TND (~8–11€)/pers</span><span class="tag tag-taxi">Erriadh→Midoun ~8 TND (~2,5€)</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Restaurant+Chez+Moktar+Midoun+Djerba" target="_blank">📍 Maps</a></div>
       </div>
-    </div>
-    <div class="slot">
-      <div class="slot-time">14h</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Retour hôtel, sieste bébé</div><span class="tag tag-taxi">🚕 ~10–12 TND (~3–4€) Midoun → hôtel</span></div>
     </div>
     <div class="slot">
       <div class="slot-time">Soir</div><div class="slot-icon">🌙</div>
       <div class="slot-body">
-        <div class="slot-title">🍽️ DÎNER SORTIE #1 — L'Autre Monde ⭐ 4.8/5</div>
-        <div class="slot-desc">Crevettes à l'ail grillées divines, cuisine créative, cadre élégant. Meilleur resto selon de nombreux voyageurs. Réservez impérativement !</div>
-        <span class="tag tag-resto">🦐 Fruits de mer & gastronomique</span>
-        <span class="tag tag-price">~50–70 TND/pers (~15–21€)</span>
-        <span class="tag tag-taxi">🚕 ~15 TND (~4,5€) depuis hôtel</span>
-        <span class="tag tag-tip">💡 Réservez au +216 50 701 375</span>
-        <a class="map-link" href="https://maps.google.com/?q=L'Autre+Monde+restaurant+Djerba+Mezraya" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">🍽️ DÎNER SORTIE #1 — L'Autre Monde ⭐4.8</div>
+        <div class="slot-desc">Crevettes à l'ail divines, cuisine créative. Meilleur resto de l'île.</div>
+        <div class="tags"><span class="tag tag-price">~50–70 TND (~15–21€)/pers</span><span class="tag tag-taxi">~15 TND (~4,5€)</span><span class="tag tag-tip">📞 +216 50 701 375</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=L+Autre+Monde+restaurant+Mezraya+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- J5 -->
-<div class="day-block d5">
+<div class="day-block d4">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J5</div>
-    <div class="day-info"><div class="day-name">Vendredi 10 mai — Repos & mer 🌊</div><div class="day-tagline">Journée "slow" — hôtel, plage, farniente</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J4</div>
+    <div class="day-info">
+      <div class="day-name">Samedi 10 mai — Repos & mer 🌊</div>
+      <div class="day-tagline">Journée slow — plage, piscine, farniente</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-10mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
     <div class="slot">
       <div class="slot-time">Matin</div><div class="slot-icon">☕</div>
-      <div class="slot-body"><div class="slot-title">Grasse matinée & petit déj tranquille</div><div class="slot-desc">Pas de programme, pas de taxi. Lisez, regardez la mer.</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-body"><div class="slot-title">Grasse matinée — aucun programme</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span></div></div>
     </div>
     <div class="slot">
-      <div class="slot-time">10h–12h30</div><div class="slot-icon">🏖️</div>
+      <div class="slot-time">10h–13h</div><div class="slot-icon">🏖️</div>
       <div class="slot-body">
         <div class="slot-title">Grande matinée plage</div>
-        <div class="slot-desc">Bébé dans l'eau peu profonde, châteaux de sable, baignades.</div>
-        <span class="tag tag-kit">☀️ Tente de plage + SPF50 + chapeau + bouée bébé</span>
+        <div class="slot-desc">Bébé dans l'eau peu profonde, châteaux de sable.</div>
+        <div class="tags"><span class="tag tag-kit">☀️ Tente + SPF50 + bouée bébé</span></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">Après-midi</div><div class="slot-icon">😴</div>
-      <div class="slot-body"><div class="slot-title">Sieste familiale / piscine</div><div class="slot-desc">Journée au rythme du bébé. Rien de prévu, tout est permis.</div></div>
+      <div class="slot-body"><div class="slot-title">Sieste familiale / piscine</div></div>
     </div>
     <div class="slot">
-      <div class="slot-time">Soir</div><div class="slot-icon">🌙</div>
-      <div class="slot-body"><div class="slot-title">Dîner all inclusive — soirée tranquille</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-time">Soir</div><div class="slot-icon">🍽️</div>
+      <div class="slot-body"><div class="slot-title">Dîner all inclusive</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span></div></div>
     </div>
   </div>
 </div>
 
-<!-- J6 -->
-<div class="day-block d6">
+<div class="day-block d5">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J6</div>
-    <div class="day-info"><div class="day-name">Samedi 11 mai — Djerba Explore 🐊</div><div class="day-tagline">Musée, village berbère & crocodiles</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J5</div>
+    <div class="day-info">
+      <div class="day-name">Dimanche 11 mai — Djerba Explore 🐊</div>
+      <div class="day-tagline">Musée ethnographique & crocodiles</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-11mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
     <div class="slot">
-      <div class="slot-time">9h</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Taxi vers Djerba Explore Park</div><span class="tag tag-taxi">🚕 ~12 TND (~3,5€)</span></div>
-    </div>
-    <div class="slot">
-      <div class="slot-time">9h30–12h</div><div class="slot-icon">🐊</div>
+      <div class="slot-time">9h–12h</div><div class="slot-icon">🐊</div>
       <div class="slot-body">
         <div class="slot-title">Djerba Explore + Crocodile Parc</div>
-        <div class="slot-desc">Musée ethnographique (30 salles de cire), village traditionnel, camel au puits, spectacle reptiles. Bébé sera fasciné. Prévoir 2h30–3h.</div>
-        <span class="tag tag-price">~32,5 TND/adulte (~10€) — bébé gratuit</span>
-        <span class="tag tag-kit">🛻 Poussette pour le parc extérieur</span>
-        <span class="tag tag-tip">💡 En taxi seul, pas avec agence — 3x moins cher !</span>
-        <a class="map-link" href="https://maps.google.com/?q=Djerba+Explore+Park+Midoun" target="_blank">📍 Google Maps</a>
+        <div class="slot-desc">30 salles de cire, village berbère, spectacle reptiles. Bébé va adorer.</div>
+        <div class="tags"><span class="tag tag-price">~32,5 TND (~10€)/adulte — bébé gratuit</span><span class="tag tag-taxi">~12 TND (~3,5€)</span><span class="tag tag-kit">🛻 Poussette</span><span class="tag tag-tip">💡 Sans agence = 3x moins cher</span></div>
+        <div class="links-row">
+          <a class="ext-link" href="https://maps.google.com/?q=Djerba+Explore+Park+Midoun" target="_blank">📍 Maps</a>
+          <a class="ext-link" href="https://www.djerba-explore.com" target="_blank">🌐 Site</a>
+        </div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">12h30</div><div class="slot-icon">🍽️</div>
       <div class="slot-body">
-        <div class="slot-title">🍽️ Déjeuner — Chez Moktar (si pas encore fait) ou resto Midoun</div>
-        <span class="tag tag-price">~25–35 TND/pers (~8–11€)</span>
+        <div class="slot-title">🍽️ Déjeuner — Chez Moktar (si pas encore fait)</div>
+        <div class="tags"><span class="tag tag-price">~25–35 TND (~8–11€)/pers</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Restaurant+Chez+Moktar+Midoun+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
-      <div class="slot-time">14h30</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Retour hôtel + sieste</div><span class="tag tag-taxi">🚕 ~12 TND (~3,5€) retour</span></div>
-    </div>
-    <div class="slot">
-      <div class="slot-time">Soir</div><div class="slot-icon">🌙</div>
-      <div class="slot-body"><div class="slot-title">Dîner all inclusive + repos</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-time">Soir</div><div class="slot-icon">🍽️</div>
+      <div class="slot-body"><div class="slot-title">Dîner all inclusive</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span></div></div>
     </div>
   </div>
 </div>
 
-<!-- J7 -->
-<div class="day-block d7">
+<div class="day-block d6">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J7</div>
-    <div class="day-info"><div class="day-name">Dimanche 12 mai — Cheval & poissons 🐎</div><div class="day-tagline">Ranch Adada + Uncle Ali's Fish Restaurant</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J6</div>
+    <div class="day-info">
+      <div class="day-name">Lundi 12 mai — Cheval & poissons 🐎</div>
+      <div class="day-tagline">Ranch Adada + Uncle Ali's + dîner sortie #2</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-12mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
-    <div class="slot">
-      <div class="slot-time">Matin</div><div class="slot-icon">☀️</div>
-      <div class="slot-body"><div class="slot-title">Matinée tranquille à l'hôtel</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
-    </div>
     <div class="slot">
       <div class="slot-time">10h30</div><div class="slot-icon">🐎</div>
       <div class="slot-body">
         <div class="slot-title">Ranch Adada — Balade à cheval sur la plage</div>
-        <div class="slot-desc">À 10 min de l'hôtel ! L'un monte pendant que l'autre reste avec bébé. Plage d'Aghir, paysage de rêve.</div>
-        <span class="tag tag-price">~80–150 TND/pers (~24–45€) selon durée</span>
-        <span class="tag tag-tip">💡 Réservez au +216 28 825 042</span>
-        <span class="tag tag-kit">👶 L'un reste avec bébé, l'autre monte !</span>
-        <a class="map-link" href="https://maps.google.com/?q=Ranch+Adada+Djerba+Aghir" target="_blank">📍 Google Maps</a>
+        <div class="slot-desc">À 10 min de l'hôtel. L'un monte, l'autre reste avec bébé.</div>
+        <div class="tags"><span class="tag tag-price">~80–150 TND (~24–45€)/pers</span><span class="tag tag-tip">📞 +216 28 825 042</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Ranch+Adada+Djerba+Aghir" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">13h</div><div class="slot-icon">🐟</div>
       <div class="slot-body">
-        <div class="slot-title">🍽️ Déjeuner — Uncle Ali's Fish Restaurant ⭐ 4.5/5</div>
-        <div class="slot-desc">Table les pieds dans le sable, face à la mer. Crevettes géantes, poisson ultra-frais. Un des meilleurs rapports qualité-plaisir de l'île.</div>
-        <span class="tag tag-resto">🦐 Fruits de mer & poissons</span>
-        <span class="tag tag-price">~35–50 TND/pers (~11–15€)</span>
-        <span class="tag tag-tip">💡 Appelez le +216 21 805 506</span>
-        <a class="map-link" href="https://maps.google.com/?q=Uncle+Ali+fish+restaurant+Djerba+Aghir" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">🍽️ Déjeuner — Uncle Ali's Fish ⭐4.5</div>
+        <div class="slot-desc">Pieds dans le sable, vue mer. Crevettes géantes ultra-fraîches.</div>
+        <div class="tags"><span class="tag tag-price">~35–50 TND (~11–15€)/pers</span><span class="tag tag-tip">📞 +216 21 805 506</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Uncle+Ali+fish+restaurant+Djerba" target="_blank">📍 Maps</a></div>
       </div>
-    </div>
-    <div class="slot">
-      <div class="slot-time">Après-midi</div><div class="slot-icon">🏖️</div>
-      <div class="slot-body"><div class="slot-title">Plage ou piscine à l'hôtel</div></div>
     </div>
     <div class="slot">
       <div class="slot-time">Soir</div><div class="slot-icon">🌙</div>
       <div class="slot-body">
-        <div class="slot-title">🍽️ DÎNER SORTIE #2 — La Bohème ⭐ 4.9/5 (optionnel)</div>
-        <div class="slot-desc">Table d'hôtes magique chez Sadok, chef-patron passionné. Cuisine maison tunisienne de haut vol. RÉSERVATION OBLIGATOIRE par WhatsApp.</div>
-        <span class="tag tag-resto">🏡 Table d'hôtes</span>
-        <span class="tag tag-price">~40–55 TND/pers (~12–17€)</span>
-        <span class="tag tag-taxi">🚕 ~10 TND (~3€) depuis hôtel</span>
-        <span class="tag tag-tip">💡 WhatsApp: +216 29 764 611 — RÉSA IMPÉRATIVE</span>
-        <a class="map-link" href="https://maps.google.com/?q=La+Boheme+restaurant+Aghir+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">🍽️ DÎNER SORTIE #2 — La Bohème ⭐4.9</div>
+        <div class="slot-desc">Table d'hôtes magique chez Sadok. RÉSA OBLIGATOIRE WhatsApp.</div>
+        <div class="tags"><span class="tag tag-price">~40–55 TND (~12–17€)/pers</span><span class="tag tag-taxi">~10 TND (~3€)</span><span class="tag tag-tip">📲 WA +216 29 764 611</span></div>
+        <div class="links-row">
+          <a class="ext-link" href="https://maps.google.com/?q=La+Boheme+restaurant+Aghir+Djerba" target="_blank">📍 Maps</a>
+          <a class="ext-link" href="https://wa.me/21629764611" target="_blank">📲 WhatsApp</a>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- J8 -->
-<div class="day-block d8">
+<div class="day-block d7">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number">J8</div>
-    <div class="day-info"><div class="day-name">Lundi 13 mai — Dernier jour plein 🌅</div><div class="day-tagline">Musée Guellala + potiers + dernière plage</div></div>
-    <div class="day-toggle">▼</div>
+    <div class="day-number">J7</div>
+    <div class="day-info">
+      <div class="day-name">Mardi 13 mai — Guellala & dernière plage 🌅</div>
+      <div class="day-tagline">Musée + potiers + plage finale</div>
+    </div>
+    <div class="day-meta">
+      <div class="day-weather" id="w-13mai">⏳</div>
+      <div class="day-toggle">▼</div>
+    </div>
   </div>
   <div class="day-content">
     <div class="slot">
-      <div class="slot-time">9h30</div><div class="slot-icon">🚕</div>
-      <div class="slot-body"><div class="slot-title">Taxi vers le Musée de Guellala</div><span class="tag tag-taxi">🚕 ~25 TND (~7,5€) côté sud de l'île</span></div>
-    </div>
-    <div class="slot">
-      <div class="slot-time">10h–12h</div><div class="slot-icon">🏛️</div>
+      <div class="slot-time">9h30</div><div class="slot-icon">🏛️</div>
       <div class="slot-body">
-        <div class="slot-title">Musée de Guellala — 30 salles de traditions</div>
-        <div class="slot-desc">Figurines de cire, mariages, poterie, Amazighs. Vue mer spectaculaire depuis la terrasse.</div>
-        <span class="tag tag-price">~10 TND/adulte (~3€)</span>
-        <span class="tag tag-kit">🛻 Poussette — intérieur accessible</span>
-        <a class="map-link" href="https://maps.google.com/?q=Guellala+Museum+Djerba" target="_blank">📍 Google Maps</a>
+        <div class="slot-title">Musée de Guellala</div>
+        <div class="slot-desc">30 salles de traditions, vue panoramique sur la mer.</div>
+        <div class="tags"><span class="tag tag-price">~10 TND (~3€)/adulte</span><span class="tag tag-taxi">~25 TND (~7,5€)</span><span class="tag tag-kit">🛻 Poussette</span></div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Guellala+Museum+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">12h</div><div class="slot-icon">🏺</div>
       <div class="slot-body">
         <div class="slot-title">Village de Guellala — potiers & souvenirs</div>
-        <div class="slot-desc">Céramiques à prix directs producteurs. Meilleurs prix vs médina.</div>
-        <span class="tag tag-tip">💡 Négociez, artisanat authentique</span>
+        <div class="slot-desc">Prix directs producteurs. Mieux que la médina.</div>
+        <div class="links-row"><a class="ext-link" href="https://maps.google.com/?q=Guellala+village+Djerba" target="_blank">📍 Maps</a></div>
       </div>
     </div>
     <div class="slot">
       <div class="slot-time">13h</div><div class="slot-icon">🍽️</div>
-      <div class="slot-body"><div class="slot-title">Dernier déjeuner all inclusive à l'hôtel</div><span class="tag tag-price">✅ Inclus hôtel</span><span class="tag tag-taxi">🚕 ~25 TND (~7,5€) retour Guellala → hôtel</span></div>
+      <div class="slot-body"><div class="slot-title">Déjeuner hôtel + retour</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span><span class="tag tag-taxi">~25 TND (~7,5€) retour</span></div></div>
     </div>
     <div class="slot">
       <div class="slot-time">15h–19h</div><div class="slot-icon">🌊</div>
-      <div class="slot-body"><div class="slot-title">Dernière plage & bain de soleil</div><div class="slot-desc">Savourez. Gravez ça dans la mémoire. Bébé dans l'eau une dernière fois.</div></div>
+      <div class="slot-body"><div class="slot-title">Dernière plage & bain de soleil 🥹</div></div>
     </div>
     <div class="slot">
       <div class="slot-time">Soir</div><div class="slot-icon">🌙</div>
-      <div class="slot-body"><div class="slot-title">Dernier dîner à l'hôtel + valises</div><div class="slot-desc">Coucher bébé tôt, préparez les valises. Réveil très tôt demain !</div><span class="tag tag-price">✅ Inclus hôtel</span></div>
+      <div class="slot-body"><div class="slot-title">Dernier dîner + valises</div><div class="tags"><span class="tag tag-price">✅ All inclusive</span><span class="tag tag-tip">💡 Coucher bébé tôt — départ 3h30 !</span></div></div>
     </div>
   </div>
 </div>
 
-<!-- DEPART -->
-<div class="day-block" style="border-left: 4px solid var(--night);">
+<div class="day-block d8">
   <div class="day-header" onclick="toggle(this)">
-    <div class="day-number" style="background: var(--night); color:white; font-size:1.4rem;">✈️</div>
-    <div class="day-info"><div class="day-name">Mardi 14 mai — Départ 6h20</div><div class="day-tagline">Lever très tôt, transfert aéroport</div></div>
+    <div class="day-number" style="font-size:1.1rem;">✈️</div>
+    <div class="day-info">
+      <div class="day-name">Mercredi 14 mai — Retour Levallois 🏠</div>
+      <div class="day-tagline">Vol 6h20 → Paris → Pont de Levallois</div>
+    </div>
     <div class="day-toggle">▼</div>
   </div>
   <div class="day-content">
     <div class="slot">
       <div class="slot-time">3h30</div><div class="slot-icon">⏰</div>
       <div class="slot-body">
-        <div class="slot-title">Réveil & départ de l'hôtel</div>
-        <div class="slot-desc">Taxi commandé la veille à la réception. ~30 min de trajet, arrivée aéroport 4h15 pour vol 6h20.</div>
-        <span class="tag tag-taxi">🚕 ~25–30 TND (~8–9€) hôtel → aéroport — à réserver la veille</span>
-        <span class="tag tag-tip">💡 Demandez à l'hôtel de réserver un taxi de confiance la veille au soir</span>
+        <div class="slot-title">Réveil & taxi aéroport</div>
+        <div class="slot-desc">Réservez le taxi la veille à la réception. ~30 min.</div>
+        <div class="tags"><span class="tag tag-taxi">~25–30 TND (~8–9€)</span><span class="tag tag-tip">💡 À réserver la veille !</span></div>
+      </div>
+    </div>
+    <div class="slot">
+      <div class="slot-time">6h20</div><div class="slot-icon">✈️</div>
+      <div class="slot-body"><div class="slot-title">Décollage → Paris CDG</div><div class="slot-desc">~2h30 de vol. Atterrissage ~9h heure française.</div></div>
+    </div>
+    <div class="slot">
+      <div class="slot-time">~10h30</div><div class="slot-icon">🚆</div>
+      <div class="slot-body">
+        <div class="slot-title">RER B → Châtelet → Métro L3 → Levallois</div>
+        <div class="slot-desc">Retour à la maison vers 11h30.</div>
+        <div class="links-row"><a class="ext-link" href="https://www.ratp.fr/itineraires" target="_blank">🗺️ RATP</a></div>
       </div>
     </div>
   </div>
 </div>
 
-</div><!-- end days-wrapper -->
+</div>
+</div>
 
-<!-- RESTOS -->
-<div class="container">
-<h2 class="section-heading">🍽️ Nos restos recommandés</h2>
+<!-- ===== RESTOS ===== -->
+<div class="panel" id="panel-restos">
 <div class="restos-grid">
   <div class="resto-card">
-    <div class="resto-name">🌟 Restaurant Malouf</div>
-    <div class="resto-stars">⭐ 4.9/5 — 271 avis</div>
-    <div class="resto-desc">Le classique de Houmt Souk. Couscous, poissons grillés, crevettes. Terrasse charmante.</div>
-    <div class="resto-price">~25–35 TND/pers (~8–11€) • Déjeuner</div>
-    <a class="map-link" href="https://maps.google.com/?q=Restaurant+Malouf+Houmt+Souk+Djerba" target="_blank">📍 Google Maps</a>
+    <div class="resto-name">🌟 Malouf</div>
+    <div class="resto-stars">⭐ 4.9 — 271 avis</div>
+    <div class="resto-desc">Classique Houmt Souk. Couscous poisson, crevettes.</div>
+    <div class="resto-price">~25–35 TND (~8–11€) • Déj</div>
+    <div class="links-row" style="margin-top:5px"><a class="ext-link" href="https://maps.google.com/?q=Restaurant+Malouf+Houmt+Souk+Djerba" target="_blank">📍 Maps</a></div>
   </div>
   <div class="resto-card">
     <div class="resto-name">🌟 Chez Moktar</div>
-    <div class="resto-stars">⭐ 4.7/5 — 1953 avis</div>
-    <div class="resto-desc">Institution à Midoun. Mlhoukhia, couscous divin, décor plein de vie. La référence de l'île.</div>
-    <div class="resto-price">~25–35 TND/pers (~8–11€) • Déj ou dîner</div>
-    <a class="map-link" href="https://maps.google.com/?q=Restaurant+Chez+Moktar+Midoun+Djerba" target="_blank">📍 Google Maps</a>
+    <div class="resto-stars">⭐ 4.7 — 1953 avis</div>
+    <div class="resto-desc">Institution Midoun. Mlhoukhia, couscous divin.</div>
+    <div class="resto-price">~25–35 TND (~8–11€) • Déj/Dîner</div>
+    <div class="links-row" style="margin-top:5px"><a class="ext-link" href="https://maps.google.com/?q=Restaurant+Chez+Moktar+Midoun+Djerba" target="_blank">📍 Maps</a></div>
   </div>
   <div class="resto-card">
     <div class="resto-name">🌟 L'Autre Monde</div>
-    <div class="resto-stars">⭐ 4.8/5 — 237 avis</div>
-    <div class="resto-desc">Crevettes à l'ail sublimes, cuisine inventive. Meilleur resto de l'île selon les voyageurs.</div>
-    <div class="resto-price">~50–70 TND/pers (~15–21€) • Dîner (résa: +216 50 701 375)</div>
-    <a class="map-link" href="https://maps.google.com/?q=L'Autre+Monde+Mezraya+Djerba" target="_blank">📍 Google Maps</a>
+    <div class="resto-stars">⭐ 4.8 — 237 avis</div>
+    <div class="resto-desc">Crevettes à l'ail sublimes. Meilleur de l'île.</div>
+    <div class="resto-price">~50–70 TND (~15–21€) • Dîner</div>
+    <div class="links-row" style="margin-top:5px">
+      <a class="ext-link" href="https://maps.google.com/?q=L+Autre+Monde+Mezraya+Djerba" target="_blank">📍 Maps</a>
+      <a class="ext-link" href="tel:+21650701375">📞</a>
+    </div>
   </div>
   <div class="resto-card">
     <div class="resto-name">🌟 Uncle Ali's Fish</div>
-    <div class="resto-stars">⭐ 4.5/5 — 1062 avis</div>
-    <div class="resto-desc">Pieds dans le sable, vue mer. Crevettes géantes fraîches. Simple, bon, authentique.</div>
-    <div class="resto-price">~35–50 TND/pers (~11–15€) • Déjeuner</div>
-    <a class="map-link" href="https://maps.google.com/?q=Uncle+Ali+fish+restaurant+Djerba" target="_blank">📍 Google Maps</a>
+    <div class="resto-stars">⭐ 4.5 — 1062 avis</div>
+    <div class="resto-desc">Pieds dans le sable. Crevettes géantes fraîches.</div>
+    <div class="resto-price">~35–50 TND (~11–15€) • Déj</div>
+    <div class="links-row" style="margin-top:5px">
+      <a class="ext-link" href="https://maps.google.com/?q=Uncle+Ali+fish+restaurant+Djerba" target="_blank">📍 Maps</a>
+      <a class="ext-link" href="tel:+21621805506">📞</a>
+    </div>
   </div>
   <div class="resto-card">
     <div class="resto-name">🌟 La Bohème</div>
-    <div class="resto-stars">⭐ 4.9/5 — 481 avis</div>
-    <div class="resto-desc">Table d'hôtes magique chez Sadok. Cuisine maison, accueil unique. RÉSERVATION IMPÉRATIVE.</div>
-    <div class="resto-price">~40–55 TND/pers (~12–17€) • Dîner (WhatsApp: +216 29 764 611)</div>
-    <a class="map-link" href="https://maps.google.com/?q=La+Boheme+Aghir+Djerba" target="_blank">📍 Google Maps</a>
+    <div class="resto-stars">⭐ 4.9 — 481 avis</div>
+    <div class="resto-desc">Table d'hôtes magique. RÉSA IMPÉRATIVE.</div>
+    <div class="resto-price">~40–55 TND (~12–17€) • Dîner</div>
+    <div class="links-row" style="margin-top:5px">
+      <a class="ext-link" href="https://maps.google.com/?q=La+Boheme+Aghir+Djerba" target="_blank">📍 Maps</a>
+      <a class="ext-link" href="https://wa.me/21629764611" target="_blank">📲 WA</a>
+    </div>
   </div>
   <div class="resto-card">
     <div class="resto-name">🌟 Restaurant de l'Île</div>
-    <div class="resto-stars">⭐ 4.5/5 — 341 avis</div>
-    <div class="resto-desc">Élégant, Houmt Souk. Mezze royal fruits de mer pour 2-3. Option 3e sortie soir.</div>
-    <div class="resto-price">~50–80 TND/pers (~15–24€) • Dîner</div>
-    <a class="map-link" href="https://maps.google.com/?q=Restaurant+de+l+Ile+Houmt+Souk+Djerba" target="_blank">📍 Google Maps</a>
+    <div class="resto-stars">⭐ 4.5 — 341 avis</div>
+    <div class="resto-desc">Élégant, Houmt Souk. Mezze fruits de mer royal.</div>
+    <div class="resto-price">~50–80 TND (~15–24€) • Dîner</div>
+    <div class="links-row" style="margin-top:5px"><a class="ext-link" href="https://maps.google.com/?q=Restaurant+de+l+Ile+Houmt+Souk+Djerba" target="_blank">📍 Maps</a></div>
   </div>
 </div>
+</div>
 
-<!-- ===== CARTE INTÉGRÉE ===== -->
-<h2 class="section-heading">🗺️ Carte de tous nos spots</h2>
+<!-- ===== CARTE ===== -->
+<div class="panel" id="panel-carte">
 <div class="map-section">
-  <iframe
-    class="map-iframe"
-    loading="lazy"
-    allowfullscreen
-    referrerpolicy="no-referrer-when-downgrade"
-    src="https://maps.google.com/maps?q=djerba+tunisia&t=m&z=11&ie=UTF8&iwloc=&output=embed"
-  ></iframe>
+  <iframe class="map-iframe" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+    src="https://maps.google.com/maps?q=djerba+tunisia&t=m&z=11&ie=UTF8&iwloc=&output=embed"></iframe>
   <div class="map-links-bar">
-    <a href="https://maps.google.com/?q=Hotel+Djerba+Castille+Aghir+Tunisia" target="_blank" class="map-btn map-btn-hotel">🏨 Notre hôtel</a>
-    <a href="https://maps.google.com/?q=Restaurant+Malouf+Houmt+Souk+Djerba" target="_blank" class="map-btn map-btn-resto">🍽️ Malouf</a>
-    <a href="https://maps.google.com/?q=Restaurant+chez+Moktar+Midoun+Djerba" target="_blank" class="map-btn map-btn-resto">🥘 Chez Moktar</a>
+    <a href="https://maps.google.com/?q=Hotel+Djerba+Castille+Aghir" target="_blank" class="map-btn map-btn-hotel">🏨 Hôtel</a>
+    <a href="https://maps.google.com/?q=Restaurant+Malouf+Houmt+Souk" target="_blank" class="map-btn map-btn-resto">🍽️ Malouf</a>
+    <a href="https://maps.google.com/?q=Restaurant+Chez+Moktar+Midoun" target="_blank" class="map-btn map-btn-resto">🥘 Moktar</a>
     <a href="https://maps.google.com/?q=L+Autre+Monde+Mezraya+Djerba" target="_blank" class="map-btn map-btn-resto">🦐 L'Autre Monde</a>
-    <a href="https://maps.google.com/?q=Uncle+Ali+fish+restaurant+Djerba" target="_blank" class="map-btn map-btn-resto">🐟 Uncle Ali's</a>
-    <a href="https://maps.google.com/?q=La+Boheme+restaurant+Aghir+Djerba" target="_blank" class="map-btn map-btn-resto">🏡 La Bohème</a>
+    <a href="https://maps.google.com/?q=Uncle+Ali+fish+Djerba" target="_blank" class="map-btn map-btn-resto">🐟 Uncle Ali's</a>
+    <a href="https://maps.google.com/?q=La+Boheme+Aghir+Djerba" target="_blank" class="map-btn map-btn-resto">🏡 La Bohème</a>
     <a href="https://maps.google.com/?q=Djerbahood+Erriadh+Djerba" target="_blank" class="map-btn map-btn-culture">🎨 Djerbahood</a>
     <a href="https://maps.google.com/?q=El+Ghriba+synagogue+Djerba" target="_blank" class="map-btn map-btn-culture">✡️ El Ghriba</a>
-    <a href="https://maps.google.com/?q=Ghazi+Mustapha+Fortress+Houmt+Souk" target="_blank" class="map-btn map-btn-culture">🏰 Fort Borj</a>
+    <a href="https://maps.google.com/?q=Borj+Ghazi+Mustapha+Djerba" target="_blank" class="map-btn map-btn-culture">🏰 Fort Borj</a>
     <a href="https://maps.google.com/?q=Djerba+Explore+Park+Midoun" target="_blank" class="map-btn map-btn-culture">🐊 Djerba Explore</a>
     <a href="https://maps.google.com/?q=Guellala+Museum+Djerba" target="_blank" class="map-btn map-btn-culture">🏛️ Guellala</a>
-    <a href="https://maps.google.com/?q=Ranch+Adada+Djerba+Aghir" target="_blank" class="map-btn map-btn-culture">🐎 Ranch Adada</a>
+    <a href="https://maps.google.com/?q=Ranch+Adada+Djerba" target="_blank" class="map-btn map-btn-culture">🐎 Ranch Adada</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== INFOS ===== -->
+<div class="panel" id="panel-infos">
+<div class="infos-grid">
+  <div class="info-card"><h3>🏨 Hôtel</h3><p>Djerba Castille<br>Couples & Families<br>Zone Aghir • All inclusive ✅</p></div>
+  <div class="info-card"><h3>💱 Monnaie</h3><p>Dinar tunisien<br><strong>1€ ≈ 3,3 TND</strong><br>DAB sur place</p></div>
+  <div class="info-card"><h3>🚕 Taxis</h3><p>→ Midoun ~10 TND (~3€)<br>→ Houmt Souk ~20 TND (~6€)<br>Négociez avant !</p></div>
+  <div class="info-card"><h3>👶 Bébé</h3><p>Porte-bébé : médina<br>Poussette : musées<br>Siestes intégrées</p></div>
+</div>
+
+<div class="budget-banner">
+  <h3>💰 Budget estimatif hors hôtel (2 adultes)</h3>
+  <div class="budget-items">
+    <div class="budget-item">Restos <span>~120–160 TND (~36–48€)</span></div>
+    <div class="budget-item">Activités <span>~150–200 TND (~45–60€)</span></div>
+    <div class="budget-item">Taxis <span>~120–150 TND (~36–45€)</span></div>
+    <div class="budget-item">Shopping <span>~50–100 TND (~15–30€)</span></div>
+    <div class="budget-item">Total ≈ <span>440–610 TND (~135–185€)</span></div>
   </div>
 </div>
 
-<!-- ===== CHECKLIST CLIQUABLE ===== -->
-<h2 class="section-heading">🎒 Checklist matériel</h2>
-
-<div class="checklist-progress">
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-fill" id="progressBar"></div>
+<div class="checklist-wrap">
+  <div class="section-mini">🎒 Checklist valise</div>
+  <div class="checklist-progress">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 12 ✓</div>
   </div>
-  <div class="progress-label" id="progressLabel">0 / 12 packed ✓</div>
-</div>
-
-<div class="checklist" id="checklist">
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Porte-bébé (médina, Djerbahood)</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Poussette (musées, parc)</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Crème solaire SPF50 bébé</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Chapeau & lunettes bébé</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Petite tente de plage</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Bouée / jouets de plage bébé</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Repas / snacks bébé (+11 mois)</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Adaptateur prise tunisienne</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Cash en dinars (retrait sur place)</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Médicaments bébé & adultes</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Lingettes & couches en extra</span>
-  </div>
-  <div class="check-item" onclick="toggleCheck(this)">
-    <div class="check-box"></div><span class="label">Réveil (départ 3h30 le dernier jour !)</span>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Porte-bébé</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Poussette</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Crème SPF50 bébé</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Chapeau & lunettes</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Tente de plage</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Bouée bébé</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Snacks bébé</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Adaptateur prise</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Cash / DAB</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Médicaments</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Lingettes & couches</span></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="label">Réveil (départ 3h30)</span></div>
   </div>
 </div>
 
-<!-- TIPS -->
-<h2 class="section-heading">💡 Conseils pratiques</h2>
-<div style="background: var(--white); border-radius: 16px; padding: 20px; line-height: 1.9; font-size: 0.88rem; color: #333;">
-  <p><strong>🚕 Taxis :</strong> Toujours négocier le prix avant de monter. Évitez les compteurs. Demandez à la réception de vous recommander un chauffeur de confiance.</p>
-  <p><strong>💱 Argent :</strong> Payez en dinars tunisiens partout. Les restaurants touristiques peuvent accepter les euros mais au mauvais taux. Retirez au DAB à l'aéroport ou en ville.</p>
-  <p><strong>🌡️ Météo :</strong> En mai, il fait ~24–28°C. Idéal pour bébé. Pas trop chaud, mer agréable.</p>
-  <p><strong>📞 Réservations :</strong> La Bohème et L'Autre Monde se remplissent vite — réservez dès vos premiers jours sur place.</p>
-  <p><strong>👶 Rythme bébé :</strong> Activités le matin (avant la grande chaleur), sieste en milieu de journée, plage en fin d'après-midi. Ce programme respecte ce cycle.</p>
-  <p><strong>🌅 Coucher de soleil :</strong> La plage d'Aghir face ouest = couchers de soleil magiques depuis votre hôtel. Profitez-en chaque soir.</p>
+<div class="tips-wrap">
+  <div class="section-mini">💡 Conseils pratiques</div>
+  <div class="tip-item"><strong>🚕 Taxis :</strong> Négociez avant de monter. Demandez un chauffeur de confiance à la réception.</div>
+  <div class="tip-item"><strong>💱 Argent :</strong> Payez en dinars. Retirez au DAB à l'aéroport ou en ville.</div>
+  <div class="tip-item"><strong>🌡️ Météo :</strong> En mai ~24–28°C. Idéal pour bébé, mer agréable.</div>
+  <div class="tip-item"><strong>📞 Réservations :</strong> La Bohème et L'Autre Monde se remplissent vite — réservez dès J1.</div>
+  <div class="tip-item"><strong>👶 Rythme bébé :</strong> Activités le matin, sieste à midi, plage en fin d'après-midi.</div>
+  <div class="tip-item"><strong>🌅 Couchers de soleil :</strong> Plage d'Aghir face ouest = magie chaque soir.</div>
+</div>
 </div>
 
-</div><!-- end container -->
-
-<footer>Programme personnalisé pour vos vacances à Djerba 🌴 — Bon voyage en famille !</footer>
+<footer>Djerba 🌴 — Programme famille • 6–14 mai 2025</footer>
 
 <script>
-// ACCORDION
+function showTab(name, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  el.classList.add('active');
+}
+
 function toggle(header) {
   const content = header.nextElementSibling;
   const arrow = header.querySelector('.day-toggle');
@@ -689,36 +725,60 @@ function toggle(header) {
   document.querySelectorAll('.day-toggle').forEach(a => a.classList.remove('open'));
   if (!isOpen) {
     content.classList.add('open');
-    arrow.classList.add('open');
-    content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (arrow) arrow.classList.add('open');
   }
 }
-document.querySelector('.day-header').click();
 
-// CHECKLIST CLIQUABLE
 function toggleCheck(item) {
   item.classList.toggle('checked');
-  updateProgress();
-}
-
-function updateProgress() {
   const total = document.querySelectorAll('.check-item').length;
   const checked = document.querySelectorAll('.check-item.checked').length;
-  const pct = Math.round((checked / total) * 100);
-  document.getElementById('progressBar').style.width = pct + '%';
-  const emoji = checked === total ? ' 🎉' : '';
-  document.getElementById('progressLabel').textContent = checked + ' / ' + total + ' packed ✓' + emoji;
+  document.getElementById('progressBar').style.width = Math.round(checked/total*100)+'%';
+  document.getElementById('progressLabel').textContent = checked+' / '+total+(checked===total?' 🎉':' ✓');
 }
 
-updateProgress();
+// MÉTÉO
+const DAYS = [
+  {id:'7mai',  date:'2025-05-07', label:'7/5'},
+  {id:'8mai',  date:'2025-05-08', label:'8/5'},
+  {id:'9mai',  date:'2025-05-09', label:'9/5'},
+  {id:'10mai', date:'2025-05-10', label:'10/5'},
+  {id:'11mai', date:'2025-05-11', label:'11/5'},
+  {id:'12mai', date:'2025-05-12', label:'12/5'},
+  {id:'13mai', date:'2025-05-13', label:'13/5'},
+];
+const WMO = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
 
-// PWA — enregistrement du service worker
+async function loadMeteo() {
+  try {
+    const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=33.76&longitude=10.98&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&timezone=Africa%2FTunis&start_date=2025-05-07&end_date=2025-05-13');
+    const data = await r.json();
+    const d = data.daily;
+    const band = document.getElementById('meteoBand');
+    band.innerHTML = '<span style="color:rgba(255,255,255,.38);font-size:.6rem;flex-shrink:0;padding-right:4px;letter-spacing:1px;">MÉTÉO</span>';
+    d.time.forEach((date, i) => {
+      const day = DAYS.find(x => x.date === date);
+      if (!day) return;
+      const icon = WMO[d.weathercode[i]] || '🌤️';
+      const tmax = Math.round(d.temperature_2m_max[i]);
+      const tmin = Math.round(d.temperature_2m_min[i]);
+      const rain = d.precipitation_probability_max[i];
+      const el = document.createElement('div');
+      el.className = 'meteo-day';
+      el.innerHTML = `<span class="meteo-label">${day.label}</span><span class="meteo-icon">${icon}</span><span class="meteo-temp">${tmax}°/${tmin}°</span>${rain>20?`<span class="meteo-rain">💧${rain}%</span>`:''}`;
+      band.appendChild(el);
+      const badge = document.getElementById('w-'+day.id);
+      if (badge) badge.textContent = `${icon} ${tmax}°`;
+    });
+  } catch(e) {
+    document.getElementById('meteoBand').innerHTML = '<span class="meteo-loading">Météo indisponible hors connexion</span>';
+    DAYS.forEach(d => { const b = document.getElementById('w-'+d.id); if(b) b.textContent=''; });
+  }
+}
+loadMeteo();
+
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('Service Worker enregistré ✅'))
-      .catch(err => console.log('Erreur SW:', err));
-  });
+  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(()=>{}));
 }
 </script>
 </body>
